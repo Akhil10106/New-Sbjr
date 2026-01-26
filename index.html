@@ -2,118 +2,166 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="SBJR Agriculture Shop - Modern agricultural solutions.">
-    
-    <title>SBJR | Modern Agriculture Shop</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M/S SBJR | Admin Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="slate-theme-light">
+<body id="app-body">
 
-    <div id="message-container" role="alert" aria-live="assertive"></div>
+    <div id="success-overlay" class="d-none">
+        <div class="text-center animate-bounce">
+            <div class="success-icon mb-3"><i class="fas fa-check-circle fa-5x text-white"></i></div>
+            <h2 class="fw-bold text-white">Success!</h2>
+            <p class="text-white opacity-75">Inventory updated securely...</p>
+        </div>
+    </div>
 
-    <main id="app-root">
-        
-        <section id="login-container" class="auth-wrapper">
-            <div class="auth-surface">
-                <header class="auth-branding">
-                    <div class="app-icon">
-                        <i class="fas fa-leaf"></i>
+    <section id="login-section" class="vh-100 d-flex align-items-center justify-content-center">
+        <div class="login-overlay"></div>
+        <div class="container z-1 position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-6 d-none d-lg-block text-white">
+                    <div class="pe-5">
+                        <span class="badge bg-white-glass mb-4 px-3 py-2 rounded-pill">Est. 2006</span>
+                        <h1 class="display-3 fw-bold mb-3">Inventory <br> <span class="text-accent">Simplified.</span></h1>
+                        <p class="lead opacity-75">M/S Suraj Bhan Jagdish Rai<br>Premium Agriculture Management.</p>
                     </div>
-                    <h1 class="brand-title">SBJR</h1>
-                    <p class="brand-tagline">Suraj Bhan Jagdish Rai Agriculture</p>
-                </header>
-
-                <div class="auth-action-area">
-                    <div class="welcome-text">
-                        <h2>Welcome Back</h2>
-                        <p>Sign in to access your dashboard and shop.</p>
-                    </div>
-
-                    <button onclick="loginWithGoogle()" class="google-auth-btn" aria-label="Sign in with Google">
-                        <svg class="google-svg" viewBox="0 0 24 24" width="20" height="20">
-                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"/>
-                        </svg>
-                        <span>Continue with Google</span>
-                    </button>
                 </div>
-
-                <footer class="auth-footer-note">
-                    <p>Secure, fast, and encrypted access.</p>
-                </footer>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="card glass-card border-0 p-5 text-center shadow-xl">
+                        <div class="icon-box-lg mb-4 mx-auto">
+                            <i class="fas fa-fingerprint fa-2x text-white"></i>
+                        </div>
+                        <h3 class="fw-bold mb-2">Admin Login</h3>
+                        <p class="text-muted mb-4">Sign in with Google Workspace</p>
+                        <button id="google-login-btn" class="btn btn-primary-gradient w-100 py-3 rounded-4 hover-scale">
+                            <i class="fab fa-google me-2"></i> Sign in with Google
+                        </button>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="home-container" class="app-shell" style="display: none;">
-            
-            <nav class="app-nav">
-                <div class="nav-top">
-                    <div class="nav-logo">SBJR</div>
-                    <div class="nav-menu">
-                        <button onclick="showHome()" class="nav-link active" title="Home">
-                            <i class="fas fa-grid-2"></i> <span>Home</span>
-                        </button>
-                        <button onclick="showShop()" class="nav-link" title="Shop">
-                            <i class="fas fa-store"></i> <span>Shop</span>
-                        </button>
-                        <button onclick="showCart()" class="nav-link" id="cart-trigger">
-                            <i class="fas fa-shopping-bag"></i> 
-                            <span>Cart</span>
-                            <span id="cart-count" class="nav-badge">0</span>
-                        </button>
-                        <button onclick="showProfile()" class="nav-link" title="Profile">
-                            <i class="fas fa-user-circle"></i> <span>Profile</span>
-                        </button>
+    <div id="main-layout" class="d-none">
+        <div id="mobile-sidebar" class="sidebar-nav">
+            <div class="p-4 d-flex justify-content-between align-items-center border-bottom">
+                <h5 class="fw-bold mb-0 text-primary">SBJR<span class="text-secondary">.Admin</span></h5>
+                <button class="btn-close" id="close-sidebar"></button>
+            </div>
+            <div class="p-3">
+                <nav class="nav flex-column gap-2">
+                    <a href="#" class="nav-item active" data-target="dashboard-view"><i class="fas fa-th-large"></i> Overview</a>
+                    <a href="#" class="nav-item" data-target="inventory-view"><i class="fas fa-cube"></i> Products</a>
+                    <a href="#" class="nav-item" data-target="add-product-view"><i class="fas fa-plus-circle"></i> Add/Edit Stock</a>
+                    <a href="#" class="nav-item" data-target="settings-view"><i class="fas fa-sliders-h"></i> Settings</a>
+                    <a href="#" class="nav-item" data-target="profile-view"><i class="fas fa-user-circle"></i> Profile</a>
+                    <a href="#" class="nav-item text-danger mt-4 logout-btn"><i class="fas fa-power-off"></i> Logout</a>
+                </nav>
+            </div>
+        </div>
+        <div id="sidebar-overlay"></div>
+
+        <header class="seamless-header px-4 py-4 d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-icon d-lg-none bg-white shadow-sm" id="open-sidebar"><i class="fas fa-bars"></i></button>
+                <div>
+                    <h4 class="fw-bold mb-0" id="page-title">Dashboard</h4>
+                    <p class="text-muted small mb-0 d-none d-md-block" id="live-date"></p>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="d-none d-md-block text-end">
+                    <span class="d-block fw-bold small" id="nav-user-name">...</span>
+                    <span class="text-xs text-muted">Store Administrator</span>
+                </div>
+                <img id="nav-user-img" src="" class="rounded-circle shadow-sm border border-2 border-white" width="45" height="45">
+            </div>
+        </header>
+
+        <main class="px-4 pb-5">
+            <div id="dashboard-view" class="content-section">
+                <div class="row row-cols-2 row-cols-md-4 g-3 mb-4">
+                    <div class="col"><div class="stat-tile bg-indigo"><div class="tile-icon"><i class="fas fa-boxes"></i></div><h2 class="fw-bold" id="stat-total-products">0</h2><small>Total Items</small></div></div>
+                    <div class="col"><div class="stat-tile bg-violet"><div class="tile-icon"><i class="fas fa-rupee-sign"></i></div><h2 class="fw-bold" id="stat-total-value">0</h2><small>Stock Value</small></div></div>
+                    <div class="col"><div class="stat-tile bg-orange"><div class="tile-icon"><i class="fas fa-bolt"></i></div><h2 class="fw-bold" id="stat-low-stock">0</h2><small>Low Stock</small></div></div>
+                    <div class="col"><div class="stat-tile bg-pink"><div class="tile-icon"><i class="fas fa-award"></i></div><h2 class="fw-bold">18+</h2><small>Top Brands</small></div></div>
+                </div>
+                <h5 class="fw-bold mb-3">Stock Overview</h5>
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0"><thead class="bg-light text-xs text-uppercase"><tr><th class="ps-4">Product</th><th>Brand</th><th>Status</th><th>Price</th></tr></thead><tbody id="dashboard-recent-table" class="bg-white"></tbody></table>
                     </div>
                 </div>
+            </div>
 
-                <div class="nav-bottom">
-                    <button onclick="showAdminPanel()" class="nav-link admin-only" style="display: none;">
-                        <i class="fas fa-chart-pie"></i> <span>Admin</span>
-                    </button>
-                    <button onclick="showOwnerPanel()" class="nav-link">
-                        <i class="fas fa-shield-halved"></i> <span>Owner</span>
-                    </button>
-                    
-                    <hr class="nav-divider">
-                    
-                    <div class="nav-controls">
-                        <button class="control-btn" onclick="toggleTheme()"><i class="fas fa-circle-half-stroke"></i></button>
-                        <button onclick="logout()" class="control-btn logout"><i class="fas fa-arrow-right-from-bracket"></i></button>
-                    </div>
+            <div id="inventory-view" class="content-section d-none">
+                <div class="bg-white p-3 rounded-4 shadow-sm mb-4 d-flex gap-2">
+                    <input type="text" id="inventory-search" class="form-control border-0 bg-light rounded-pill px-3" placeholder="Search Seeds, Pesticides...">
+                    <select id="category-filter" class="form-select border-0 bg-light rounded-pill w-auto"><option value="All">All Categories</option><option>Seed</option><option>Fertilizer</option><option>Pesticide</option></select>
                 </div>
-            </nav>
+                <div id="product-grid" class="row g-3"></div>
+            </div>
 
-            <div class="app-viewport">
-                <header class="viewport-header">
-                    <div id="season-display" class="dynamic-chip"></div>
-                    <div class="header-actions">
-                        <div id="user-display" class="user-pill">
+            <div id="add-product-view" class="content-section d-none">
+                <div class="card border-0 shadow-sm rounded-4 p-4 mx-auto bg-white" style="max-width:750px">
+                    <h5 class="fw-bold mb-4" id="form-title">New Stock Entry</h5>
+                    <form id="product-form">
+                        <input type="hidden" id="edit-id"> <div class="row g-3">
+                            <div class="col-12"><label class="text-xs fw-bold text-uppercase text-muted">Product Image</label><input type="file" id="prod-image" class="form-control bg-light border-0" accept="image/*"></div>
+                            <div class="col-12"><label class="text-xs fw-bold text-uppercase text-muted">Name</label><input type="text" id="prod-name" class="form-control bg-light border-0" required></div>
+                            <div class="col-md-6"><label class="text-xs fw-bold text-uppercase text-muted">Category</label><select id="prod-category" class="form-select bg-light border-0"><option>Seed</option><option>Fertilizer</option><option>Pesticide</option></select></div>
+                            <div class="col-md-6"><label class="text-xs fw-bold text-uppercase text-muted">Brand</label><input type="text" id="prod-brand" class="form-control bg-light border-0" required list="brand-list"><datalist id="brand-list"><option value="Syngenta"><option value="Bayer"><option value="Indofil"><option value="Mankind"></datalist></div>
+                            <div class="col-md-6"><label class="text-xs fw-bold text-uppercase text-muted">Price (₹)</label><input type="number" id="prod-price" class="form-control bg-light border-0" required></div>
+                            <div class="col-md-6"><label class="text-xs fw-bold text-uppercase text-muted">Stock Quantity</label><input type="number" id="prod-qty" class="form-control bg-light border-0" required></div>
+                            <div class="col-12 pt-3"><button id="submit-btn" class="btn btn-primary-gradient w-100 rounded-pill py-3 fw-bold">Save To Database</button></div>
+                            <div class="col-12 text-center"><button type="button" id="cancel-edit" class="btn btn-link text-muted d-none">Cancel Editing</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="settings-view" class="content-section d-none">
+                <div class="card border-0 shadow-sm rounded-4 p-4 mx-auto bg-white" style="max-width:600px">
+                    <h5 class="fw-bold mb-4">System Preferences</h5>
+                    <div class="mb-4"><label class="text-xs fw-bold text-uppercase text-muted d-block mb-2">Typography</label><select id="setting-font-family" class="form-select border-0 bg-light"><option value="'Outfit', sans-serif">Outfit (Modern)</option><option value="system-ui">System Default</option></select></div>
+                    <div class="mb-4"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ui-density"><label class="form-check-label">Compact Dashboard Tiles</label></div></div>
+                    <button id="save-settings" class="btn btn-primary-gradient w-100 rounded-pill py-2">Apply Changes</button>
+                </div>
+            </div>
+
+            <div id="profile-view" class="content-section d-none">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-xl rounded-4 overflow-hidden bg-white text-center">
+                            <div class="profile-cover"></div>
+                            <div class="card-body pt-0 position-relative">
+                                <div class="profile-avatar-wrapper"><img id="profile-img-large" src="" class="rounded-circle border border-4 border-white shadow-lg"><div class="status-indicator online"></div></div>
+                                <h3 class="fw-bold mb-1 mt-3" id="profile-name-large">...</h3>
+                                <p class="text-muted small mb-4" id="profile-email-large">...</p>
+                                <div class="row g-2 mb-4">
+                                    <div class="col-4"><div class="p-2 bg-light rounded-3 small">Role<br><b class="text-indigo">Master</b></div></div>
+                                    <div class="col-4"><div class="p-2 bg-light rounded-3 small">Store<br><b class="text-indigo">#001</b></div></div>
+                                    <div class="col-4"><div class="p-2 bg-light rounded-3 small">Verified<br><b class="text-success">Yes</b></div></div>
+                                </div>
+                                <button class="btn btn-danger-soft w-100 rounded-pill logout-btn">Logout Securely</button>
                             </div>
+                        </div>
                     </div>
-                </header>
-                
-                <div id="content" class="dynamic-container">
-                    </div>
+                </div>
             </div>
-        </section>
+        </main>
+    </div>
 
-    </main>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast text-white bg-dark border-0 rounded-3" role="alert"><div class="toast-body" id="toast-msg"></div></div>
+    </div>
 
-    <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
-    <script defer src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
